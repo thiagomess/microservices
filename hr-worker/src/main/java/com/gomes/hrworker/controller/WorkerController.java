@@ -2,6 +2,7 @@ package com.gomes.hrworker.controller;
 
 import java.util.List;
 
+import org.springframework.core.env.Environment;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +14,20 @@ import com.gomes.hrworker.controller.exceptions.ObjectNotFoundException;
 import com.gomes.hrworker.entity.Worker;
 import com.gomes.hrworker.repository.WorkerRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/workers")
 public class WorkerController {
 
 	private WorkerRepository workerRepository;
+	
+	private Environment env;
 
-	public WorkerController(WorkerRepository workerRepository) {
+	public WorkerController(WorkerRepository workerRepository, Environment env) {
 		this.workerRepository = workerRepository;
+		this.env = env;
 	}
 
 	@GetMapping
@@ -31,6 +38,8 @@ public class WorkerController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Worker> findAById(@PathVariable Long id) throws NotFoundException {
+		log.info("PORT = " + env.getProperty("local.server.port"));
+		
 		Worker worker = workerRepository.findById(id)
 				.orElseThrow(() -> new ObjectNotFoundException("Objeto Não encontrado: Id: " + id));
 		return ResponseEntity.ok(worker);
