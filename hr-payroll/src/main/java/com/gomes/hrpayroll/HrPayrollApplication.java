@@ -2,11 +2,10 @@ package com.gomes.hrpayroll;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.cloud.openfeign.FeignClient;
 
-@RibbonClient(name = "hr-worker")
+@EnableEurekaClient
 @EnableFeignClients
 @SpringBootApplication
 public class HrPayrollApplication {
