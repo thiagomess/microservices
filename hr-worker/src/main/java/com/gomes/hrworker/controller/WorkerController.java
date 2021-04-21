@@ -40,6 +40,14 @@ public class WorkerController {
 	public ResponseEntity<Worker> findAById(@PathVariable Long id) throws NotFoundException {
 		log.info("PORT = " + env.getProperty("local.server.port"));
 		
+		/*
+		try {
+			System.out.println("Timeout ");
+			Thread.sleep(15000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		*/
 		Worker worker = workerRepository.findById(id)
 				.orElseThrow(() -> new ObjectNotFoundException("Objeto Não encontrado: Id: " + id));
 		return ResponseEntity.ok(worker);
