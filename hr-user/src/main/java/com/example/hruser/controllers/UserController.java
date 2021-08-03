@@ -32,7 +32,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/search")
-	public ResponseEntity<User> findAByEmail(@RequestParam String email) throws NotFoundException, ObjectNotFoundException {
+	public ResponseEntity<User> findByEmail(@RequestParam String email) throws NotFoundException, ObjectNotFoundException {
 
 		User user = userRepository.findByEmail(email);
 		return ResponseEntity.ok(user);
