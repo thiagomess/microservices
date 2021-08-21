@@ -2,7 +2,6 @@ package com.gomes.hrworker.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
@@ -24,8 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/workers")
 public class WorkerController {
 
-	@Value("${test.config}")
-	private String testConfig;
+//	@Value("${test.config}")
+//	private String testConfig;
 	
 	private WorkerRepository workerRepository;
 	
@@ -38,7 +37,7 @@ public class WorkerController {
 	
 	@GetMapping(value = "/configs")
 	public ResponseEntity<Void> getConfig() {
-		log.info("CONFIG = " + testConfig);
+//		log.info("CONFIG = " + testConfig);
 		return ResponseEntity.noContent().build();
 	}
 
